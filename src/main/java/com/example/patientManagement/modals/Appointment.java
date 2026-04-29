@@ -18,8 +18,6 @@ public class Appointment extends BaseModel {
     @Column(nullable = false)
     private AppointmentStatus appointmentStatus;
 
-
-
     @CreatedDate
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
