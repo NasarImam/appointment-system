@@ -16,7 +16,8 @@ public class Patient extends BaseModel {
 
     private String name;
 
-    private String email_id;
+    @Column(name = "email_id") // optional (for DB naming)
+    private String email;
 
     private Long contact_number;
 

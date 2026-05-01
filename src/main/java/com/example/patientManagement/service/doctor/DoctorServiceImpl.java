@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DoctorServiceImpl implements DoctorService{
@@ -26,15 +27,23 @@ public class DoctorServiceImpl implements DoctorService{
         // check with correct Department ID if not found throw exception
         Department department=departmentRepository.findById(departmentId).orElseThrow(()-> new RuntimeException("Department not found"));
 
+        // check if doctor is already present or not
+        if(doctorRepository.existsByEmailId(doctor.getEmailId())){
+            throw new RuntimeException("Doctor with this email ID already exist");
+        }
+
         //set new department for doctor
         doctor.setDepartment(department);
 
+
         return doctorRepository.save(doctor);
+
     }
 
     public Optional<Doctor> getDoctorById(Long id) {
         return doctorRepository.findById(id);
     }
+
 
 
     @Override

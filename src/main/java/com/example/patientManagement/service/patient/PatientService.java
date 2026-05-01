@@ -13,4 +13,7 @@ PatientService {
     Patient createPatient(Patient patient);
     Optional<Patient> getPatientById(Long id);
     List<Patient> getAllPatients();
+
+
 }
+

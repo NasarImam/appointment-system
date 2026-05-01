@@ -12,5 +12,6 @@ import java.util.List;
 public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
     List<Doctor> findAllByDepartment_Id(Long departmentId);
+    Boolean existsByEmailId(String emailId);
 
 }

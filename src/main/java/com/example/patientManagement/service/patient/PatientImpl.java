@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 @Service
 
 
@@ -20,12 +23,20 @@ public class PatientImpl  implements PatientService, CommandLineRunner{
 
     @Override
     public Patient createPatient(Patient patient) {
+
+        if (patientRepository.existsByEmail(patient.getEmail())) {
+            throw new RuntimeException("Patient with this email already exists");
+        }
+
+
         return patientRepository.save(patient);
     }
 
     @Override
 
     public Optional<Patient> getPatientById(Long id) {
+
+
 
         Optional<Patient> patient= patientRepository.findById(id);
         if (patient.isEmpty()) {
@@ -36,7 +47,7 @@ public class PatientImpl  implements PatientService, CommandLineRunner{
 
     @Override
     public List<Patient> getAllPatients() {
-        return List.of();
+        return patientRepository.findAll();
     }
 
     @Override
