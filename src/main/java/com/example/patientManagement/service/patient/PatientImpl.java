@@ -28,6 +28,12 @@ public class PatientImpl  implements PatientService, CommandLineRunner{
             throw new RuntimeException("Patient with this email already exists");
         }
 
+        Patient newPatient = Patient.builder()
+                .name(patient.getName())
+                .email(patient.getEmail())
+                .contact_number(patient.getContact_number())
+                .build();
+
 
         return patientRepository.save(patient);
     }

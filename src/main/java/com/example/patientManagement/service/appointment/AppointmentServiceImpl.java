@@ -44,8 +44,8 @@ public class AppointmentServiceImpl implements AppointmentService{
         Doctor doctor=doctorRepository.findById(doctorId).orElseThrow(()-> new RuntimeException("doctor not found"));
 
         //Check if any appointment exists with: doctor_id + appointment_time
-        boolean slotAvailablity= appointmentRepository.existsByDoctor_IdAndAppointmentTime(doctorId,appointmentTime);
-        if(slotAvailablity){
+        boolean slotAvailable= appointmentRepository.existsByDoctor_IdAndAppointmentTime(doctorId,appointmentTime);
+        if(slotAvailable){
             throw new RuntimeException("slot not available");
         }
 
