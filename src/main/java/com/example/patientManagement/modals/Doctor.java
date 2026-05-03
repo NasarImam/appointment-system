@@ -1,8 +1,10 @@
 package com.example.patientManagement.modals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -11,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Doctor extends BaseModel{
+public class Doctor extends com.example.patientManagement.models.BaseModel {
 
     @Column(nullable = false)
     private String name;
@@ -22,15 +24,17 @@ public class Doctor extends BaseModel{
 
 
     @Column(nullable = false)
-    private Long contactNumber;
+    private String contactNumber;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
     //one doctor can have many appointment
-    @OneToMany
-    private List<Appointment> appointment;
+    @JsonIgnore
+    @OneToMany(mappedBy = "doctor")
+    @Builder.Default
+    private List<Appointment> appointments = new ArrayList<>();
 
 
 }

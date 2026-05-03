@@ -6,7 +6,8 @@ import com.example.patientManagement.repository.DepartmentRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface DepartmentService {
+public interface
+DepartmentService {
 
     Department createDepartment(String name);
     Optional<Department> getDepartmentById(Long id);

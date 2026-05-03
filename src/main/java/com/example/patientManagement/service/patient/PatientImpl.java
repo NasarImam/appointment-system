@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 
 @Service
 
 
-public class PatientImpl  implements PatientService, CommandLineRunner{
+public class PatientImpl  implements PatientService{
 
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+
+    public PatientImpl(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
+    }
 
 
 
@@ -31,11 +34,11 @@ public class PatientImpl  implements PatientService, CommandLineRunner{
         Patient newPatient = Patient.builder()
                 .name(patient.getName())
                 .email(patient.getEmail())
-                .contact_number(patient.getContact_number())
+                .contactNumber(patient.getContactNumber())
                 .build();
 
 
-        return patientRepository.save(patient);
+        return patientRepository.save(newPatient);
     }
 
     @Override
@@ -56,9 +59,5 @@ public class PatientImpl  implements PatientService, CommandLineRunner{
         return patientRepository.findAll();
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("====================================");
 
-    }
 }

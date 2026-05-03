@@ -106,4 +106,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 
         return appointmentRepository.findAllByPatient_Id(patientId);
     }
+
+    @Override
+    public List<Appointment> getAllAppointmentByDoctor(Long doctorId) {
+        return appointmentRepository.findAllByDoctor_Id(doctorId);
+    }
 }

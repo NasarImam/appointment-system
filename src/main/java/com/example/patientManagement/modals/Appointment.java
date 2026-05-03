@@ -3,6 +3,9 @@ package com.example.patientManagement.modals;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import com.example.patientManagement.models.BaseModel;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 @Getter
@@ -23,12 +26,10 @@ public class Appointment extends BaseModel {
     @Column(nullable = false)
     private AppointmentStatus appointmentStatus;
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date createdAt;
+
 
     // appointment booking time
+    @Column(nullable = false)
     LocalDateTime appointmentTime;
 
     //many appointment can be handled by only one doctor
@@ -39,5 +40,7 @@ public class Appointment extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "patient_id",nullable = false)
     private Patient patient;
+
+
 
 }
